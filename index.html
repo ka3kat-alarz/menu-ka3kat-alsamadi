@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المنيو الإلكتروني | كعكة الأرز</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffaf4;
+      --card: #ffffff;
+      --ink: #1e1812;
+      --muted: #6e6257;
+      --accent: #d95d1a;
+      --accent-dark: #9e3d0a;
+      --accent-soft: #fff0e5;
+      --border: #efe3d5;
+      --tag-bg: #f6ede2;
+      --shadow: 0 8px 24px rgba(30, 24, 18, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      padding-bottom: 84px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #2a180d 0%, #5e270b 55%, #b8470e 100%);
+      color: #fff;
+      padding: 24px 18px 28px;
+      text-align: center;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 10px 30px rgba(42, 24, 13, 0.18);
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .hero p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .main-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: -32px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .main-tab {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 8px;
+      text-align: center;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 13.5px;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.2s ease;
+    }
+
+    .main-tab span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .main-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .main-tab.active span {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .controls {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      position: sticky;
+      top: 8px;
+      z-index: 10;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: #fcf8f3;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .sub-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .sub-tabs::-webkit-scrollbar { display: none; }
+
+    .sub-tab {
+      flex: 0 0 auto;
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--tag-bg);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .sub-tab.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .section-block {
+      margin-bottom: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-right: 4px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--accent-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 20px;
+      border-radius: 99px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+
+    .item-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 3px 12px rgba(30, 24, 18, 0.03);
+    }
+
+    .item-name {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 1px 7px;
+      border-radius: 999px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .tag-double {
+      background: #fff0e5;
+      color: #c2410c;
+      border: 1px solid #fdba74;
+    }
+
+    .tag-extra {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+
+    .tag-size {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+
+    .item-price {
+      font-weight: 900;
+      font-size: 14.5px;
+      color: var(--accent-dark);
+      white-space: nowrap;
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+
+    .branches-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+    }
+
+    .branches-card h2 {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .branch-box {
+      background: #fcf8f3;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .branch-name {
+      font-weight: 800;
+      font-size: 14.5px;
+      margin-bottom: 4px;
+    }
+
+    .branch-addr {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .branch-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      transition: 0.15s ease;
+    }
+
+    .btn-call {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-wa {
+      background: #16a34a;
+      color: #fff;
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      z-index: 20;
+    }
+
+    .bottom-bar a {
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 10px 16px;
+      border-radius: 12px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 520px) {
+      .main-tab { font-size: 12px; padding: 10px 6px; }
+      .hero h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="badge">قائمة الأصناف والأسعار</div>
+    <h1 id="brandTitle">كعكة الأرز</h1>
+    <p>كعكة العصرونية • كعكة الطرابلسية • مناقيش مشروحين</p>
+  </header>
+
+  <main class="container">
+    <div class="main-tabs" id="mainTabs">
+      <button class="main-tab active" data-menu="asroneyeh">
+        كعكة العصرونية
+        <span>القائمة الأولى</span>
+      </button>
+      <button class="main-tab" data-menu="trablousieh">
+        كعكة الطرابلسية
+        <span>القائمة الثانية</span>
+      </button>
+      <button class="main-tab" data-menu="mashrouhin">
+        مناقيش مشروحين
+        <span>القائمة الثالثة</span>
+      </button>
+    </div>
+
+    <div class="controls">
+      <input type="search" id="searchInput" class="search-box" placeholder="ابحث عن صنف... مثلاً: عكاوي، نوتيلا، سجق، زعتر" />
+      <div class="sub-tabs" id="subTabs"></div>
+    </div>
+
+    <div id="menuContent"></div>
+
+    <section class="branches-card" id="branchesSection">
+      <h2>الفرع ورقم التلفون</h2>
+      <div class="branches-grid" id="branchesGrid"></div>
+    </section>
+  </main>
+
+  <div class="bottom-bar">
+    <a href="#branchesSection">رقم التلفون للطلب</a>
+  </div>
+
+  <script>
+    const STORE_INFO = {
+      name: "كعكة الأرز",
+      currency: "ل.ل.",
+      branches: [
+        {
+          name: "كعكة الأرز",
+          address: "76860937",
+          phone: "76860937",
+          whatsapp: "96176860937"
+        }
+      ]
+    };
+
+    const MENU_DATA = {
+      asroneyeh: {
+        label: "كعكة العصرونية",
+        categories: [
+          {
+            name: "الكلاسيك",
+            items: [
+              { name: "كعكة سادة", price: "100,000" },
+              { name: "زعتر وزيت", price: "200,000" },
+              { name: "بندورة وبصل", price: "300,000" },
+              { name: "بندورة وبصل وجبنة", price: "400,000" }
+            ]
+          },
+          {
+            name: "اللبنة",
+            items: [
+              { name: "لبنة وزيتون", price: "250,000" },
+              { name: "لبنة ومكدوس", price: "300,000" },
+              { name: "لبنة ومرتديلا", price: "450,000" }
+            ]
+          },
+          {
+            name: "الأجبان",
+            items: [
+              { name: "عكاوي", price: "380,000" },
+              { name: "عكاوي", tag: "دوبل", tagType: "double", price: "500,000" },
+              { name: "حلوم", price: "400,000" },
+              { name: "حلوم", tag: "دوبل", tagType: "double", price: "500,000" },
+              { name: "قشقوان", price: "430,000" },
+              { name: "قشقوان", tag: "دوبل", tagType: "double", price: "550,000" },
+              { name: "بيكون", price: "350,000" },
+              { name: "بيكون", tag: "دوبل", tagType: "double", price: "450,000" },
+              { name: "فيتا", price: "350,000" },
+              { name: "بلغاري", price: "350,000" },
+              { name: "شلل وزبدة", price: "380,000" }
+            ]
+          },
+          {
+            name: "مكس أجبان",
+            items: [
+              { name: "عكاوي وبيكون", price: "550,000" },
+              { name: "بيكون وحلوم", price: "550,000" },
+              { name: "عكاوي وحلوم", price: "600,000" },
+              { name: "بيكون وقشقوان", price: "600,000" },
+              { name: "عكاوي وقشقوان", price: "650,000" },
+              { name: "شلل وعكاوي", price: "650,000" },
+              { name: "شلل وقشقوان", price: "650,000" },
+              { name: "فيتا وقشقوان", price: "650,000" },
+              { name: "بلغاري وقشقوان", price: "650,000" },
+              { name: "عكاوي وحلوم وقشقوان", price: "750,000" },
+              { name: "عكاوي وبيكون وقشقوان", price: "750,000" },
+              { name: "عكاوي وبيكون وحلوم وقشقوان", price: "800,000" },
+              { name: "عكاوي وقشقوان وموزريلا وتشدر", price: "830,000" }
+            ]
+          },
+          {
+            name: "المرتديلا",
+            items: [
+              { name: "مرتديلا", price: "400,000" },
+              { name: "مرتديلا وبيكون", price: "600,000" },
+              { name: "مرتديلا وحلوم", price: "600,000" },
+              { name: "مرتديلا وعكاوي", price: "600,000" },
+              { name: "مرتديلا وقشقوان", price: "620,000" }
+            ]
+          },
+          {
+            name: "لحوم ودجاج",
+            items: [
+              { name: "سجق وقشقوان", price: "550,000" },
+              { name: "فاهيتا وقشقوان", price: "550,000" },
+              { name: "طاووق وقشقوان", price: "550,000" },
+              { name: "تشدر هوت دوغ", price: "600,000" },
+              { name: "حبش وقشقوان", price: "650,000" }
+            ]
+          },
+          {
+            name: "كعكة بيتزا",
+            items: [
+              { name: "خضرا", price: "500,000" },
+              { name: "مرتديلا", price: "650,000" },
+              { name: "سجق", price: "650,000" },
+              { name: "بيبروني", price: "650,000" },
+              { name: "تشدر هوت دوغ", price: "650,000" },
+              { name: "حبش", price: "700,000" },
+              { name: "دجاج باربكيو", price: "700,000" }
+            ]
+          },
+          {
+            name: "الصحون",
+            items: [
+              { name: "خضرا", price: "100,000" },
+              { name: "لبنة وزيتون وحر", price: "250,000" },
+              { name: "لبنة ومكدوس", price: "300,000" },
+              { name: "لبنة", tag: "إكسترا", tagType: "extra", price: "300,000" },
+              { name: "مشكل", price: "600,000" },
+              { name: "مشكل", tag: "إكسترا", tagType: "extra", price: "800,000" }
+            ]
+          },
+          {
+            name: "الحلو",
+            items: [
+              { name: "نوتيلا", price: "400,000" },
+              { name: "نوتيلا وموز", price: "450,000" },
+              { name: "نوتيلا", tag: "إكسترا", tagType: "extra", price: "500,000" }
+            ]
+          }
+        ]
+      },
+
+      trablousieh: {
+        label: "كعكة الطرابلسية",
+        categories: [
+          {
+            name: "الكلاسيك",
+            items: [
+              { name: "كعكة سادة", price: "30,000" },
+              { name: "زعتر وزيت", price: "100,000" },
+              { name: "بندورة وبصل", price: "150,000" },
+              { name: "بندورة وبصل وجبنة", price: "250,000" }
+            ]
+          },
+          {
+            name: "اللبنة",
+            items: [
+              { name: "لبنة وزيتون", price: "130,000" },
+              { name: "لبنة ومكدوس", price: "160,000" },
+              { name: "لبنة ومرتديلا", price: "250,000" }
+            ]
+          },
+          {
+            name: "الأجبان",
+            items: [
+              { name: "عكاوي", price: "190,000" },
+              { name: "عكاوي", tag: "دوبل", tagType: "double", price: "250,000" },
+              { name: "حلوم", price: "200,000" },
+              { name: "حلوم", tag: "دوبل", tagType: "double", price: "250,000" },
+              { name: "قشقوان", price: "230,000" },
+              { name: "قشقوان", tag: "دوبل", tagType: "double", price: "280,000" },
+              { name: "بيكون", price: "180,000" },
+              { name: "بيكون", tag: "دوبل", tagType: "double", price: "230,000" },
+              { name: "فيتا", price: "160,000" },
+              { name: "بلغاري", price: "160,000" },
+              { name: "شلل وزبدة", price: "200,000" }
+            ]
+          },
+          {
+            name: "مكس أجبان",
+            items: [
+              { name: "عكاوي وبيكون", price: "280,000" },
+              { name: "بيكون وحلوم", price: "280,000" },
+              { name: "عكاوي وحلوم", price: "280,000" },
+              { name: "بيكون وقشقوان", price: "300,000" },
+              { name: "شلل وعكاوي", price: "300,000" },
+              { name: "عكاوي وقشقوان", price: "330,000" },
+              { name: "شلل وقشقوان", price: "330,000" },
+              { name: "فيتا وقشقوان", price: "330,000" },
+              { name: "بلغاري وقشقوان", price: "330,000" },
+              { name: "عكاوي وحلوم وقشقوان", price: "350,000" },
+              { name: "عكاوي وبيكون وقشقوان", price: "350,000" },
+              { name: "عكاوي وبيكون وحلوم وقشقوان", price: "400,000" }
+            ]
+          },
+          {
+            name: "المرتديلا",
+            items: [
+              { name: "مرتديلا", price: "200,000" },
+              { name: "مرتديلا وبيكون", price: "300,000" },
+              { name: "مرتديلا وحلوم", price: "300,000" },
+              { name: "مرتديلا وعكاوي", price: "300,000" },
+              { name: "مرتديلا وقشقوان", price: "300,000" }
+            ]
+          },
+          {
+            name: "لحوم ودجاج",
+            items: [
+              { name: "سجق وقشقوان", price: "300,000" },
+              { name: "فاهيتا وقشقوان", price: "300,000" },
+              { name: "طاووق وقشقوان", price: "300,000" },
+              { name: "حبش وقشقوان", price: "330,000" }
+            ]
+          },
+          {
+            name: "كعكة بيتزا",
+            items: [
+              { name: "خضرا", price: "250,000" },
+              { name: "مرتديلا", price: "330,000" },
+              { name: "سجق", price: "330,000" },
+              { name: "بيبروني", price: "330,000" },
+              { name: "حبش", price: "350,000" },
+              { name: "دجاج باربكيو", price: "350,000" }
+            ]
+          },
+          {
+            name: "الحلو",
+            items: [
+              { name: "نوتيلا", price: "200,000" },
+              { name: "نوتيلا وموز", price: "230,000" },
+              { name: "نوتيلا", tag: "إكسترا", tagType: "extra", price: "250,000" }
+            ]
+          }
+        ]
+      },
+
+      mashrouhin: {
+        label: "مناقيش مشروحين",
+        categories: [
+          {
+            name: "الكلاسيك",
+            items: [
+              { name: "زعتر", price: "100,000" },
+              { name: "زعتر مع خضرا", price: "120,000" },
+              { name: "بندورة وبصل", price: "250,000" },
+              { name: "بندورة وبصل وجبنة", price: "300,000" }
+            ]
+          },
+          {
+            name: "اللبنة",
+            items: [
+              { name: "لبنة وزيتون", price: "200,000" },
+              { name: "لبنة ومكدوس", price: "250,000" }
+            ]
+          },
+          {
+            name: "الأجبان",
+            items: [
+              { name: "عكاوي", price: "250,000" },
+              { name: "عكاوي", tag: "دوبل", tagType: "double", price: "380,000" },
+              { name: "حلوم", price: "300,000" },
+              { name: "حلوم", tag: "دوبل", tagType: "double", price: "380,000" },
+              { name: "قشقوان", price: "350,000" },
+              { name: "قشقوان", tag: "دوبل", tagType: "double", price: "420,000" },
+              { name: "بيكون", price: "300,000" },
+              { name: "بيكون", tag: "دوبل", tagType: "double", price: "400,000" },
+              { name: "فيتا", price: "250,000" },
+              { name: "بلغاري", price: "250,000" },
+              { name: "شلل", price: "330,000" }
+            ]
+          },
+          {
+            name: "مكس أجبان",
+            items: [
+              { name: "كوكتيل طبقتين", price: "330,000" },
+              { name: "عكاوي وبيكون", price: "400,000" },
+              { name: "بيكون وحلوم", price: "400,000" },
+              { name: "عكاوي وحلوم", price: "400,000" },
+              { name: "بيكون وقشقوان", price: "420,000" },
+              { name: "عكاوي وقشقوان", price: "420,000" },
+              { name: "شلل وقشقوان", price: "420,000" },
+              { name: "فيتا وقشقوان", price: "420,000" },
+              { name: "بلغاري وقشقوان", price: "420,000" },
+              { name: "عكاوي وحلوم وقشقوان", price: "500,000" },
+              { name: "عكاوي وبيكون وقشقوان", price: "500,000" },
+              { name: "4 أجبان", price: "600,000" },
+              { name: "عكاوي وقشقوان وموزريلا وتشدر", price: "700,000" }
+            ]
+          },
+          {
+            name: "المرتديلا",
+            items: [
+              { name: "مرتديلا وبيكون", price: "420,000" },
+              { name: "مرتديلا وحلوم", price: "420,000" },
+              { name: "مرتديلا وعكاوي", price: "450,000" },
+              { name: "مرتديلا وقشقوان", price: "470,000" 
